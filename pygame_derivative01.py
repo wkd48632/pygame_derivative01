@@ -13,16 +13,17 @@ W, H = screen.get_size()
 def events():
   raw = pygame.event.get()
   ret = []
-  if event.type == pygame.QUIT:
-    ret.append(('quit',0))
-  elif event.type == pygame.KEYDOWN:
-    ret.append(('keydown'))
-  elif event.type == pygame.KEYUP:
-    ret.append(('keyup'))
-  elif event.type == pygame.MOUSEMOTION:
-    ret.append(('mousemove')) # refer to js
-  elif event.type == pygame.MOUSEBUTTONUP:
-    ret.append(('mouseup'))
-  elif event.type == pygame.MOUSSEBUTTONDDOWN:
-    ret.append(('mousedown'))
-
+  for event in raw:
+    if event.type == pygame.QUIT:
+        ret.append(('quit',0))
+    elif event.type == pygame.KEYDOWN:
+        ret.append(('keydown', event.key))
+    elif event.type == pygame.KEYUP:
+        ret.append(('keyup', event.key))
+    elif event.type == pygame.MOUSEMOTION:
+        ret.append(('mousemove', event.pos)) # refer to js
+    elif event.type == pygame.MOUSEBUTTONUP:
+        ret.append(('mouseup', event.button))
+    elif event.type == pygame.MOUSEBUTTONDOWN:
+        ret.append(('mousedown', event.button))
+  return ret
